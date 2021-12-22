@@ -61,17 +61,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
             // Store data in session variables
+
+
+            // Redirect user to welcome page
             $_SESSION["loggedin"] = true;
             $_SESSION['CREATED'] = time();
             $_SESSION["username"] = $username;
-            $_SESSION['USER'] = "internal";
-
-            // Redirect user to welcome page
-            header("location: dashboard.php");
+            $_SESSION['uuID'] = $r['uuID'];
 
             //If current game is 000 goto pre-game lobby
             $emptyUUID = 00000000-0000-0000-0000-000000000000;
-            if ($emptyUUID == $r['uCurrentGameID']){}
+            if ($emptyUUID === $r['uCurrentGameID']){
+
+              header("location: home.php");
+            }
+
+            
             //If current game is set go straight to game (check admin status in that page not here)
             
         } else {

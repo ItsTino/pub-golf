@@ -1,0 +1,17 @@
+{
+    "name": "debian/alpine.cx",
+    "description": "pub-golf",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Debian\\AlpineCx\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Valentino Duval",
+            "email": "me@valentino.cx"
+        }
+    ],
+    "require": {}
+}

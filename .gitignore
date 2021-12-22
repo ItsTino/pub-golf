@@ -1,0 +1,7 @@
+
+.vscode/launch.json
+.vscode/settings.json
+kimsufilocal.session.sql
+public/pass.php
+src/mariadbconn.php
+vendor/

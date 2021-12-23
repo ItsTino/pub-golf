@@ -1,5 +1,5 @@
 function gameIDpopup(uuID) {
-let gameIDprompt = prompt("Enter your game join code");
+let joinIDprompt = prompt("Enter your game join code");
 
 var settings = {
     "url": "https://alpine.cx/game/api.php",
@@ -11,7 +11,7 @@ var settings = {
     "data": {
       "action": "joingame",
       "uuID": uuID,
-      "gameID": gameIDprompt
+      "joinID": joinIDprompt
     }
   };
   console.log(settings);

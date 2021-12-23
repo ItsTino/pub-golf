@@ -1,0 +1,8 @@
+function getAllScores() {
+    
+}
+
+while (true) {
+
+}
+

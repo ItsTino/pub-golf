@@ -56,6 +56,7 @@ $username = $_SESSION['username'];
       <h3 class="float-md-start mb-0">XMAS Pub Golf 🎅🎄🎁</h3>
       <nav class="nav nav-masthead justify-content-center float-md-end">
         <a class="nav-link active" aria-current="page" href="#">You're logged in as <?= $username ?></a>
+        <a class="nav-link" href="/logout.php">Logout</a>
       </nav>
     </div>
   </header>
@@ -67,7 +68,7 @@ $username = $_SESSION['username'];
     <button type="button" onclick="gameIDpopup('<?= $_SESSION['uuID']?>')" class="btn btn-primary btn-lg">Play!</button>
     <br>
     <br>
-    <button type="button" class="btn btn-secondary btn-lg">Create</button>
+    <button type="button" class="btn btn-secondary btn-lg" disabled>Create</button>
   </main>
 
   <footer class="mt-auto text-white-50">

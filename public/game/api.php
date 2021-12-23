@@ -1,5 +1,7 @@
 <?php
-include '../../src/mariadbconn.php';
+session_start();
+require_once '../../src/mariadbconn.php';
+require_once '../../src/gameApiFuncs.php';
 // Load Composer's autoloader
 require '../../vendor/autoload.php';
 
@@ -19,8 +21,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($_POST['action'] == 'joingame') {
         //Check game code to see if it exists
         
-        $gameID = filter_var($_POST['gameID'], FILTER_SANITIZE_STRING);
+        $joinID = filter_var($_POST['joinID'], FILTER_SANITIZE_STRING);
         if ($stmt = mysqli_prepare($dbconnect, "SELECT * FROM tblGameInfo WHERE gameJoinCode=?")) {
+
+            /* bind parameters for markers */
+            $stmt->bind_param("s", $joinID);
+
+            $stmt->execute();
+
+            $result = $stmt->get_result();
+
+            while ($row = $result->fetch_all(MYSQLI_BOTH)) {
+                foreach ($row as $r) {
+                    $_SESSION['gameInviteCode'] = $joinID;
+                    $_SESSION['currentGameSession'] = $r['uGameID'];
+                    echo 'success';
+                }
+            }
+        }
+    }
+
+    //Return game status by gameID
+    //Return 0 => waiting
+    //Return 1 => started
+    //Return 2 => done
+    if ($_POST['action'] == 'checkgamestatus') {
+        $gameID = filter_var($_POST['gameID'], FILTER_SANITIZE_STRING);
+        
+        if ($stmt = mysqli_prepare($dbconnect, "SELECT * FROM tblGameInfo WHERE uGameID=?")) {
 
             /* bind parameters for markers */
             $stmt->bind_param("s", $gameID);
@@ -31,10 +59,39 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             while ($row = $result->fetch_all(MYSQLI_BOTH)) {
                 foreach ($row as $r) {
-                    $passhash = $r['uPassHash'];
+                    $gameStatusNo = $r['gameStatus'];
+                    
                 }
+                
+                switch ($gameStatusNo) {
+                    case '0':                    
+                      echo 'waiting';
+                      break;
+                    case '1':
+                      echo 'started';
+                      break;
+                    case '2':
+                      echo 'done';
+                      break;
+                    default:
+                     echo('error');      
+                  }
             }
+    }
+}
+
+    //Get Pre-Game Lobby Information
+    //This is going to return players in the game and what team they're in
+    if ($_POST['getpregameinfo']) {
+        class pregameplayer{
+            public $uuID;
+            public $uDisplayName;
+            public $teamID;
+            public $teamName;
         }
+    
+        $pregameplayer = array();
+
     }
 
 

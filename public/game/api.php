@@ -35,6 +35,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 foreach ($row as $r) {
                     $_SESSION['gameInviteCode'] = $joinID;
                     $_SESSION['currentGameSession'] = $r['uGameID'];
+                    if ($_SESSION['uuID'] == $r['gameOwnerID']) {
+                        $_SESSION['isMod'] = true;
+                    } else {
+                        $_SESSION['isMod'] = false;
+                    }
                     echo 'success';
                 }
             }

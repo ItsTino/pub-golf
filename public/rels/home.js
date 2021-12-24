@@ -17,6 +17,9 @@ var settings = {
   console.log(settings);
   $.ajax(settings).done(function (response) {
     console.log(response);
+    if (response == "success") {
+      window.location.href = 'https://alpine.cx/game/';
+    }
   });
 
 }

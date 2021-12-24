@@ -10,7 +10,7 @@ session_start();
 
 // Check if the user is already logged in, if yes then redirect him to welcome page
 if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
-    header("location: dashboard.php");
+    header("location: /game/index.php");
     exit;
 }
 
@@ -100,7 +100,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>Pub Gwolf</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/sign-in/">
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DY9P72D0E7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'G-DY9P72D0E7');
+</script>
     
 
     <!-- Bootstrap core CSS -->

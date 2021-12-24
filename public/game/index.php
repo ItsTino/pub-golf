@@ -31,7 +31,15 @@ function gameLoop($gameID) {
 
 
 
-    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DY9P72D0E7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-DY9P72D0E7');
+</script>
 
     <!-- Bootstrap core CSS -->
 <link href="/rels/bootstrap.min.css" rel="stylesheet" >
@@ -73,21 +81,27 @@ function gameLoop($gameID) {
     <a href="/" class="d-flex align-items-center text-dark text-decoration-none">
       <img class="mb-4" src="/rels/default-monochrome.svg" alt="" width="148" height="114">
     </a>
+    
+    
   </header>
 
   <main>
     <h1><?= $username ?></h1>
     <p class="fs-5 col-md-8">You're on round number: 1</p>
     <p class="fs-5 col-md-8">Your Team Name: team_one</p>
-    <p class="fs-5 col-md-8">Your Team Score: 0</p>
-    <p class="fs-5 col-md-8">Your Personal Score: 0</p>
+    <p class="fs-5 col-md-8">Your Team Score: 7</p>
+    <p class="fs-5 col-md-8">Your Personal Score: 3</p>
     
 <?php 
 //Show the scoring button if the user is the game mod
 if ($isMod == true) {
-  echo'<div class="mb-5"><a href="scoring.php" class="btn btn-warning btn-lg px-4">Score this round</a></div>';
+  echo'<div class="mb-3"><a href="scoring.php" class="btn btn-warning btn-lg px-4">Score this round</a></div>';
 }
+
 ?>
+<div class="mb-3">
+  <a href="map.php" class="btn btn-warning btn-lg px-4">View Map</a>
+</div>
 
 
     <hr class="col-3 col-md-2 mb-5">
@@ -95,11 +109,54 @@ if ($isMod == true) {
     <div class="row g-5">
       <div class="col-md-6">
         <h2>Leaderboard!</h2>
-        <p>Ready to beyond the starter template? Check out these open source projects that you can quickly duplicate to a new GitHub repository.</p>
-        <ul class="icon-list">
-          <li><a href="https://github.com/twbs/bootstrap-npm-starter" rel="noopener" target="_blank">Bootstrap npm starter</a></li>
-          <li class="text-muted">Bootstrap Parcel starter (coming soon!)</li>
-        </ul>
+        <p></p>
+        <style>
+        table{
+    width:100%;
+}
+        </style>
+        <table id="table" name="table">
+  <tr>
+    <th>Team</th>
+    <th>Player</th>
+    <th>Score</th>
+  </tr>
+  <tr>
+    <td>team_one</td>
+    <td>tino</td>
+    <td>3</td>
+  </tr>
+  <tr>
+    <td>team_one</td>
+    <td>ryan</td>
+    <td>4</td>
+  </tr>
+  <tr>
+    <td>team_one</td>
+    <td>total</td>
+    <td>7</td>
+  </tr>
+  <tr>
+    <th>Team</th>
+    <th>Player</th>
+    <th>Score</th>
+  </tr>
+  <tr>
+    <td>team_two</td>
+    <td>joel</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td>team_two</td>
+    <td>dylan</td>
+    <td>6</td>
+  </tr>
+  <tr>
+    <td>team_two</td>
+    <td>total</td>
+    <td>8</td>
+  </tr>
+</table>
       </div>
     </div>
   </main>
@@ -109,7 +166,7 @@ if ($isMod == true) {
 </div>
 
 
-    <script src="/docs/5.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="/rels/bootstrap.js"></script>
 
       
   </body>

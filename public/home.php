@@ -15,7 +15,15 @@ $username = $_SESSION['username'];
     <title>Cover Template · Bootstrap v5.1</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/cover/">
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DY9P72D0E7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'G-DY9P72D0E7');
+</script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
     <!-- Bootstrap core CSS -->

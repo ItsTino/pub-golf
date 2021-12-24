@@ -1,5 +1,6 @@
 <?php
-
+require_once('mariadbconn.php');
+require_once('globalVars.php');
 
 function guidv4($data = null) {
     // Generate 16 bytes (128 bits) of random data or use the data passed into the function.
@@ -17,6 +18,77 @@ function guidv4($data = null) {
 
 function checkGameStatus($gameID) {
 
+}
+
+function getTeams($gameID) {
+    $dbconnect = get_dbc();
+    $teamArray = [];
+        if ($stmt = mysqli_prepare($dbconnect, "SELECT uTeamID, teamName FROM tblTeamInfo WHERE teamActiveGameID=?")) {
+
+            /* bind parameters for markers */
+            $stmt->bind_param("s", $gameID);
+
+            $stmt->execute();
+
+            $result = $stmt->get_result();
+
+            while ($row = $result->fetch_all(MYSQLI_BOTH)) {
+                foreach ($row as $r) {
+                    array_push($teamArray, array('teamID' => $r['uTeamID'], 'teamName' => $r['teamName']));
+                    
+                }
+            }
+            return $teamArray;
+        }
+}
+
+function getCurrentRoundInfo($gameID) {
+    $dbconnect = get_dbc();
+    $clArray = clArray();
+    $currentRoundArray = [];
+
+        if ($stmt = mysqli_prepare($dbconnect, "SELECT gameRound FROM tblGameInfo WHERE uGameID=?")) {
+
+            /* bind parameters for markers */
+            $stmt->bind_param("s", $gameID);
+
+            $stmt->execute();
+
+            $result = $stmt->get_result();
+
+            while ($row = $result->fetch_all(MYSQLI_BOTH)) {
+                foreach ($row as $r) {
+                    $currentRoundArray = $clArray[$r['gameRound']];
+                    
+                }
+            }
+            
+            return $currentRoundArray;
+            
+        }
+}
+
+
+function getScores($gameID) {
+    $dbconnect = get_dbc();
+    $teamArray = [];
+        if ($stmt = mysqli_prepare($dbconnect, "SELECT uTeamID, teamName FROM tblTeamInfo WHERE teamActiveGameID=?")) {
+
+            /* bind parameters for markers */
+            $stmt->bind_param("s", $gameID);
+
+            $stmt->execute();
+
+            $result = $stmt->get_result();
+
+            while ($row = $result->fetch_all(MYSQLI_BOTH)) {
+                foreach ($row as $r) {
+                    array_push($teamArray, array('teamID' => $r['uTeamID'], 'teamName' => $r['teamName']));
+                    
+                }
+            }
+            return $teamArray;
+        }
 }
 
 ?>

@@ -77,7 +77,7 @@ function gameLoop($gameID) {
   <body>
     
 <div class="col-lg-8 mx-auto p-1 py-md-5">
-  <header class="d-flex align-items-center pb-3 mb-5 border-bottom">
+  <header class="d-flex align-items-center pb-3 border-bottom">
     <a href="/" class="d-flex align-items-center text-dark text-decoration-none">
       <img class="mb-4" src="/rels/default-monochrome.svg" alt="" width="148" height="114">
     </a>
@@ -88,9 +88,11 @@ function gameLoop($gameID) {
   <main>
     <h1><?= $username ?></h1>
     <p class="fs-5 col-md-8">You're on round number: 1</p>
+    <p class="fs-5 col-md-8">You're headed to: The Lark Rise</p>
+    <p class="fs-5 col-md-8">You're Drinking: Lager</p>
+    <p class="fs-5 col-md-8">This hole's par is: 3</p>
     <p class="fs-5 col-md-8">Your Team Name: team_one</p>
     <p class="fs-5 col-md-8">Your Team Score: 7</p>
-    <p class="fs-5 col-md-8">Your Personal Score: 3</p>
     
 <?php 
 //Show the scoring button if the user is the game mod
@@ -115,47 +117,33 @@ if ($isMod == true) {
     width:100%;
 }
         </style>
-        <table id="table" name="table">
+        <table id="table" name="table" class="table table-striped table-lg">
   <tr>
     <th>Team</th>
-    <th>Player</th>
     <th>Score</th>
+    <th>Δ</th>
   </tr>
   <tr>
     <td>team_one</td>
-    <td>tino</td>
-    <td>3</td>
+    <td>5</td>
+    <td>-2</td>
   </tr>
   <tr>
-    <td>team_one</td>
-    <td>ryan</td>
-    <td>4</td>
-  </tr>
-  <tr>
-    <td>team_one</td>
-    <td>total</td>
+    <td>course par</td>
     <td>7</td>
+    <td>====</td>
   </tr>
   <tr>
-    <th>Team</th>
-    <th>Player</th>
-    <th>Score</th>
-  </tr>
-  <tr>
-    <td>team_two</td>
-    <td>joel</td>
-    <td>2</td>
-  </tr>
-  <tr>
-    <td>team_two</td>
-    <td>dylan</td>
-    <td>6</td>
-  </tr>
-  <tr>
-    <td>team_two</td>
-    <td>total</td>
+    <td>team_three</td>
     <td>8</td>
+    <td>+3</td>
   </tr>
+  <tr>
+    <td>team_two</td>
+    <td>15</td>
+    <td>+7</td>
+  </tr>
+
 </table>
       </div>
     </div>

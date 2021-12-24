@@ -1,8 +1,15 @@
 <?php
+require_once('../../src/gameApiFuncs.php');
+//Get DB connection
 //Check login
 
 //Check gamecreatorid is the same as the current userID
 
+
+//Get teams save into array
+$teamArray = getTeams($_SESSION['currentGameSession']);
+$scoreArray = getScores($_SESSION['currentGameSession']);
+$roundInfoArray = getCurrentRoundInfo($_SESSION['currentGameSession']);
 ?>
 
 <!doctype html>
@@ -17,7 +24,15 @@
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/checkout/">
 
-    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DY9P72D0E7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-DY9P72D0E7');
+</script>
 
     <!-- Bootstrap core CSS -->
 <link href="/rels/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
@@ -52,16 +67,39 @@
     <div class="py-5 text-center">
     <img class="mb-4" src="/rels/default-monochrome.svg" alt="" width="148" height="114">
       <h2>SCORING FORM</h2>
-      <p class="lead">Press save after entering a score/award/penalty</p>
+      <p class="lead">Press save after entering the score for a team</p>
     </div>
 
     <div class="row g-5">
       <div class="col-md-5 col-lg-4 order-md-last">
         <h4 class="d-flex justify-content-between align-items-center mb-3">
           <span class="text-primary">Scoring Round:</span>
-          <span class="badge bg-primary rounded-pill">3</span>
+          <span class="badge bg-primary rounded-pill">1</span>
     </h4>
+    <ul class="list-group mb-3">
+          <li class="list-group-item d-flex justify-content-between lh-sm">
+            <div>
+              <h6 class="my-0">team_one</h6>
+              <small class="text-muted">Unsaved</small>
+            </div>
+            <span class="text-muted"></span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between lh-sm">
+            <div>
+              <h6 class="my-0">team_two</h6>
+              <small class="text-muted">Score:</small>
+            </div>
+            <span class="text-muted">8</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between lh-sm">
+            <div>
+              <h6 class="my-0">team_three</h6>
+              <small class="text-muted">Score:</small>
+            </div>
+            <span class="text-muted">9</span>
+          </li>
 
+        </ul>
       </div>
       <div class="col-md-7 col-lg-8">
         <h4 class="mb-3">Add Score</h4>
@@ -78,19 +116,12 @@
               </select>
             </div>
 
-            <div class="col-md-4">
-              <label for="state" class="form-label">Type</label>
-              <select class="form-select" id="state" required>
-                <option>Choose...</option>
-                <option value="drink">Drink</option>
-                <option value="penalty">Penalty</option>
-                <option value="award">Award</option>
-              </select>
-            </div>
 
             <div class="col-md-3">
-              <label for="zip" class="form-label">Points</label>
+              <label for="zip" class="form-label">Score (Total Sips Per Team)</label>
               <input type="text" class="form-control" id="zip" placeholder="" required>
+
+            <p>The par for this hole is: 3</p>
 
             </div>
           </div>

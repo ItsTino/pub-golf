@@ -1,6 +1,6 @@
 <?php
 //Check that the user is in an active game
-require_once('../../src/mariadbconn.php');
+require_once('../../src/gameApiFuncs.php');
 session_start();
 
 if (!isset($_SESSION['loggedin'])) {
@@ -10,14 +10,13 @@ if (!isset($_SESSION['loggedin'])) {
   $gameID = filter_var($_SESSION['currentGameSession'], FILTER_SANITIZE_STRING);
   $username = $_SESSION['username'];
   $isMod = $_SESSION['isMod'];
-  gameLoop($gameID);
+  gameLoop($gameID, $teamID);
 }
 
-function gameLoop($gameID) {
-      //Get our dbconnection from mariadbconn
-      $dbconnect = get_dbc();
-
-      //Get 
+function gameLoop($gameID, $teamID) {
+  //Get game info, round info, team score, leaderboard info from ApiFuncs
+  //Team Score
+  $teamScore = getTeamScore($gameID, $teamID);
 }
 ?>
 

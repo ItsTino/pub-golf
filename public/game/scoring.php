@@ -79,7 +79,7 @@ $curScoreArr = getScoreForRound($curRound);
   <div class="container">
     <main>
       <div class="py-5 text-center">
-        <img class="mb-4" src="/rels/default-monochrome.svg" alt="" width="148" height="114">
+        <a href="/game/"><img class="mb-4" src="/rels/default-monochrome.svg" alt="" width="148" height="114"></a>
         <h2>SCORING FORM</h2>
         <p class="lead">Press save after entering the score for a team</p>
       </div>
@@ -91,7 +91,7 @@ $curScoreArr = getScoreForRound($curRound);
             <span class="badge bg-primary rounded-pill"><?= $curRound ?></span>
           </h4>
           <ul class="list-group mb-3">
-
+    <p>Showing saved score for current round</p>
             <?php
             foreach ($curScoreArr as $csLine) {
               echo '<li class="list-group-item d-flex justify-content-between lh-sm"><div><h6 class="my-0">' . $csLine["team"] . '</h6><small class="text-muted">Score:</small></div><span class="text-muted">' . $csLine["score"] . '</span></li>';

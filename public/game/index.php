@@ -141,7 +141,7 @@ if (!isset($_SESSION['loggedin'])) {
 
       ?>
       <div class="mb-3">
-        <a href="map.php" class="btn btn-warning btn-lg px-4">View Map</a>
+        <a href="/spectate/" class="btn btn-warning btn-lg px-4">View Map</a>
       </div>
 
 

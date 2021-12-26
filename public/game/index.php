@@ -47,7 +47,6 @@ if (!isset($_SESSION['loggedin'])) {
     }
   }
   $scoreBoardArray = getScoreBoard($gameID, $gameRound);
-
 }
 
 
@@ -61,9 +60,10 @@ if (!isset($_SESSION['loggedin'])) {
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="">
-  <title>Starter Template · Bootstrap v5.1</title>
+  <title>Pub Golf</title>
 
 
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-DY9P72D0E7"></script>
@@ -158,7 +158,7 @@ if (!isset($_SESSION['loggedin'])) {
           </style>
 
           <table id="table" name="table" class="table table-striped table-lg">
-          <tr>
+            <tr>
               <th>Team</th>
               <th>Score</th>
               <th>Δ</th>
@@ -170,6 +170,41 @@ if (!isset($_SESSION['loggedin'])) {
           </table>
         </div>
       </div>
+      <!-- Send location to api for spectate map -->
+      <script>
+
+        <?php echo 'name="' . $username . '";' ?>
+        console.log("running");
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(sendPos);
+
+          function sendPos(position) {
+            lat = position.coords.latitude;
+            long = position.coords.longitude;
+
+            var settings = {
+              "url": "https://alpine.cx/game/api.php",
+              "method": "POST",
+              "timeout": 0,
+              "headers": {
+                "Content-Type": "application/x-www-form-urlencoded"
+              },
+              "data": {
+                "action": "sendLoc",
+                "name": name,
+                "lat": lat,
+                "long": long
+              }
+            };
+
+            $.ajax(settings).done(function(response) {
+              console.log(name + " " + lat + " " + long);
+            });
+          }
+        } else {
+
+        }
+      </script>
     </main>
     <footer class="pt-5 my-5 text-muted border-top">
       Created by Valentino Duval &middot; &copy; 2021

@@ -60,11 +60,9 @@ function getCurrentRoundInfo($gameID)
 
         while ($row = $result->fetch_all(MYSQLI_BOTH)) {
             foreach ($row as $r) {
-                $currentRoundArray = $clArray[$r['gameRound']];
+                return $r['gameRound'];
             }
         }
-
-        return $currentRoundArray;
     }
 }
 
@@ -118,7 +116,7 @@ function getTeamScore($gameID, $teamID)
 {
     $teamScore = 0;
     $dbconnect = get_dbc();
-    if ($stmt = mysqli_prepare($dbconnect, "SELECT `rsScore` FROM tblRoundScore WHERE rsGameID=? AND rsTeamID = ?")) {
+    if ($stmt = mysqli_prepare($dbconnect, "SELECT * FROM tblRoundScore WHERE rsGameID=? AND rsTeamID = ?")) {
 
         /* bind parameters for markers */
         $stmt->bind_param("ss", $gameID, $teamID);
@@ -133,5 +131,107 @@ function getTeamScore($gameID, $teamID)
             }
         }
         return $teamScore;
+    }
+}
+
+function getTeamName($teamID)
+{
+    $dbconnect = get_dbc();
+
+    if ($stmt = mysqli_prepare($dbconnect, "SELECT * FROM tblTeamInfo WHERE uTeamID=?")) {
+
+        /* bind parameters for markers */
+        $stmt->bind_param("s", $teamID);
+
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+
+        while ($row = $result->fetch_all(MYSQLI_BOTH)) {
+            foreach ($row as $r) {
+                return $r['teamName'];
+            }
+        }
+    }
+}
+
+function getScoreBoard($gameID, $roundNo)
+{
+    $dbconnect = get_dbc();
+    $tempResArray = [];
+
+    if ($stmt = mysqli_prepare($dbconnect, "SELECT * FROM tblRoundScore INNER JOIN tblTeamInfo ON `tblRoundScore`.`rsTeamID` = `tblTeamInfo`.`uTeamID` WHERE rsGameID=?")) {
+
+        /* bind parameters for markers */
+        $stmt->bind_param("s", $gameID);
+
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+
+        while ($row = $result->fetch_all(MYSQLI_BOTH)) {
+            foreach ($row as $r) {
+                array_push($tempResArray, array('round' => $r['rsRound'], 'score' => $r['rsScore'], 'team' => $r['teamName']));
+            }
+        }
+        //Get totalPar for the whole
+        //Assume 2 players per team
+        $roundInfoArray = clArray();
+        $roundInfo = $roundInfoArray[$roundNo];
+        $parTotal = $roundInfo['partotal'];
+        $realPar = $parTotal * 2;
+
+
+
+        $unique_team = array_unique(array_map(function ($elem) {
+            return $elem['team'];
+        }, $tempResArray));
+
+
+        $teamScoreArr = [];
+        $counter = 1;
+        foreach ($unique_team as $team) {
+            $scoreCount = 0;
+            foreach ($tempResArray as $gSBarr) {
+                if ($gSBarr['team'] == $team)
+                    $scoreCount = $scoreCount + $gSBarr['score'];
+            }
+            //$parDif = $realPar - $scoreCount;
+            $parDif = $scoreCount - $realPar;
+            array_push($teamScoreArr, array('team' => $team, 'score' => $scoreCount, 'parDif' => $parDif));
+        }
+        //add partotal as team for leaderboard
+        array_push($teamScoreArr, array('team' => 'Course Par', 'score' => $realPar, 'parDif' => '==='));
+
+        //Sort array from low to high score (lower is better)
+
+
+        $price = array_column($teamScoreArr, 'score');
+
+        array_multisort($price, SORT_ASC, $teamScoreArr);
+
+        return ($teamScoreArr);
+    }
+}
+
+function getScoreForRound($roundNo) //todo also search with game ID
+{
+    $dbconnect = get_dbc();
+    $curRoundScoreArray = [];
+    if ($stmt = mysqli_prepare($dbconnect, "SELECT `tblTeamInfo`.`teamName`, `tblRoundScore`.`rsScore` FROM tblRoundScore INNER JOIN tblTeamInfo ON `tblRoundScore`.`rsTeamID` = `tblTeamInfo`.`uTeamID` WHERE rsRound=?")) {
+
+        /* bind parameters for markers */
+        $stmt->bind_param("i", $roundNo);
+
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+
+        while ($row = $result->fetch_all(MYSQLI_BOTH)) {
+            foreach ($row as $r) {
+                array_push($curRoundScoreArray, array('team' => $r['teamName'], 'score' => $r['rsScore']));
+            }
+        }
+        return $curRoundScoreArray;
     }
 }

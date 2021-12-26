@@ -68,7 +68,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['CREATED'] = time();
             $_SESSION["username"] = $username;
             $_SESSION['uuID'] = $r['uuID'];
+            $_SESSION['gameID'] = $r['uCurrentGameID'];
+            $_SESSION['teamID'] = $r['uCurrentTeamID'];
 
+            header("location: /game/");
             //If current game is 000 goto pre-game lobby
             $emptyUUID = '00000000-0000-0000-0000-000000000000';
             if ($emptyUUID === $r['uCurrentGameID']){

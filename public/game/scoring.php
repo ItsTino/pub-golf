@@ -31,7 +31,7 @@ $curScoreArr = getScoreForRound($curRound);
   <meta name="description" content="">
   <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
   <meta name="generator" content="Hugo 0.88.1">
-  <title>Pub Gold · Scoring</title>
+  <title>Pub Golf · Scoring</title>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
   <script src="/rels/scoring.js"></script>
 

@@ -12,7 +12,7 @@ $username = $_SESSION['username'];
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.88.1">
-    <title>Cover Template · Bootstrap v5.1</title>
+    <title>Pub Golf -  Home</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/cover/">
 <!-- Global site tag (gtag.js) - Google Analytics -->

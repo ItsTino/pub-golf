@@ -100,7 +100,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Xmas Pub Gwolf">
     <meta name="author" content="Valentino Duval">
-    <title>Pub Gwolf</title>
+    <title>Pub Golf</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/sign-in/">
 <!-- Global site tag (gtag.js) - Google Analytics -->

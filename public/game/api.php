@@ -116,6 +116,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         }
     }
+
+    if ($_POST['action'] == 'sendLoc') {
+        $name = $_POST['name'];
+        $lat = $_POST['lat'];
+        $long = $_POST['long'];
+
+
+        if ($stmt = mysqli_prepare($dbconnect, "UPDATE `tblUserLoc` SET `lat` = ?, `long` = ? WHERE `name` = ?")) {
+
+            /* bind parameters for markers */
+            $stmt->bind_param("sss", $lat, $long, $name);
+
+            $stmt->execute();
+
+            echo 'success';
+
+        }
+    }
 } else {
     echo "Hi, you shouldn't be accessing this directly :)";
     exit();

@@ -226,9 +226,9 @@ function getScoreBoard($gameID, $roundNo)
         //Sort array from low to high score (lower is better)
 
 
-        $price = array_column($teamScoreArr, 'score');
+        $sortArr = array_column($teamScoreArr, 'score');
 
-        array_multisort($price, SORT_ASC, $teamScoreArr);
+        array_multisort($sortArr, SORT_ASC, $teamScoreArr);
 
         return ($teamScoreArr);
     }

@@ -155,6 +155,26 @@ function getTeamName($teamID)
     }
 }
 
+function getPlayerLocations()
+{
+    $dbconnect = get_dbc();
+    $locArr = [];
+    if ($stmt = mysqli_prepare($dbconnect, "SELECT * FROM tblUserLoc")) {
+
+
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+
+        while ($row = $result->fetch_all(MYSQLI_BOTH)) {
+            foreach ($row as $r) {
+                array_push($locArr, array('name' => $r['name'], 'lat' => $r['lat'], 'long' => $r['long']));
+            }
+        }
+        return $locArr;
+    }
+}
+
 function getScoreBoard($gameID, $roundNo)
 {
     $dbconnect = get_dbc();
